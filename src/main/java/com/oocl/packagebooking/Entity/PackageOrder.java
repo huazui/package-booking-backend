@@ -1,15 +1,13 @@
 package com.oocl.packagebooking.Entity;
 
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
-public class PageOrder {
-    public PageOrder() {
+@Entity
+public class PackageOrder {
+    public PackageOrder() {
     }
-    public PageOrder(String number,String name,String phone,int weigth){
+    public PackageOrder(String number, String name, String phone, int weigth){
         this.name=name;
         this.number=number;
         this.phone=phone;
