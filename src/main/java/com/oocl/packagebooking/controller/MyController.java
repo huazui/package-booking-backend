@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/package")
@@ -45,5 +46,19 @@ public class MyController {
 public ResponseEntity deletePackage(@PathVariable("id")String id){
   myService.deletePackage(id);
 return ResponseEntity.status(HttpStatus.CREATED).build();
+}
+
+ @GetMapping("/ready")
+ public ResponseEntity<List<PackageOrder>> getReady(){
+  List<PackageOrder> lists = myService.getAll();
+  List<PackageOrder>filterList = lists.stream().filter(item-> item.isStatus()).collect(Collectors.toList());
+  return ResponseEntity.ok(filterList);
+}
+
+  @GetMapping("/noyet")
+  public ResponseEntity<List<PackageOrder>> getNoYet(){
+  List<PackageOrder> lists = myService.getAll();
+ List <PackageOrder> filterList = lists.stream().filter(item->!item.isStatus()).collect(Collectors.toList());
+  return ResponseEntity.ok(filterList);
 }
 }
